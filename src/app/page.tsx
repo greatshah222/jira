@@ -1,11 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+"use client";
+
+import { useCurrent } from "@/features/auth/api/use-current";
 
 export default function Home() {
-	return (
-		<div className="flex gap-4">
-			<Button>Click me</Button>
-			<Input />
-		</div>
-	);
+	const { data } = useCurrent();
+
+	console.log("data", data);
+	return <div className="flex gap-4"></div>;
 }
