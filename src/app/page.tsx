@@ -1,10 +1,14 @@
-"use client";
+import { getCurrent } from "@/features/auth/action";
+import { UserButton } from "@/features/auth/components/user-button";
+import { redirect } from "next/navigation";
 
-import { useCurrent } from "@/features/auth/api/use-current";
+export default async function Home() {
+	const user = await getCurrent();
 
-export default function Home() {
-	const { data } = useCurrent();
-
-	console.log("data", data);
-	return <div className="flex gap-4"></div>;
+	if (!user) redirect("/sign-in");
+	return (
+		<div className="flex gap-4">
+			<UserButton />
+		</div>
+	);
 }
