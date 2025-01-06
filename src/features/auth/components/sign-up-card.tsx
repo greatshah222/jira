@@ -10,23 +10,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 // import { signUpWithGithub, signUpWithGoogle } from "@/lib/oauth";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { registerSchema } from "@/features/auth/schema";
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 
-// import { registerSchema } from "../schemas";
-// import { useRegister } from "../api/use-register";
-
-export const registerSchema = z.object({
-	name: z.string().trim().min(1, "Required"),
-	email: z.string().email(),
-	password: z.string().min(8, "Minimum of 8 characters required"),
-});
+import { useRegister } from "../api/use-register";
 
 export const SignUpCard = () => {
-	// const { mutate, isPending } = useRegister();
-
-	const isPending = false;
+	const { mutate, isPending } = useRegister();
 
 	const form = useForm<z.infer<typeof registerSchema>>({
 		resolver: zodResolver(registerSchema),
@@ -37,7 +29,11 @@ export const SignUpCard = () => {
 		},
 	});
 
-	const onSubmit = (values: z.infer<typeof registerSchema>) => {};
+	const onSubmit = (values: z.infer<typeof registerSchema>) => {
+		mutate({
+			json: values,
+		});
+	};
 
 	return (
 		<Card className="w-full h-full md:w-[487px] border-none shadow-none">
