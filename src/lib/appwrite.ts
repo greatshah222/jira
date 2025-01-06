@@ -1,0 +1,18 @@
+import "server-only"; // NOW THIS CAN BE ONLY USED FROM SERVER COMPONENT
+
+import { Client, Account, Storage, Users, Databases } from "node-appwrite";
+
+// WHEN ADMIN NEEDS TO CREATE SOMETHING WE USER BELOW
+
+export async function createAdminClient() {
+	const client = new Client()
+		.setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
+		.setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!)
+		.setKey(process.env.NEXT_APPWRITE_KEY!);
+
+	return {
+		get account() {
+			return new Account(client);
+		},
+	};
+}
