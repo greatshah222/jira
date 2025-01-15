@@ -23,6 +23,7 @@ import Image from "next/image";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ImageIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export const CreateWorkspaceForm = ({ onCancel }: { onCancel?: () => void }) => {
 	const { mutate, isPending } = useCreateWorkspace();
@@ -161,6 +162,7 @@ export const CreateWorkspaceForm = ({ onCancel }: { onCancel?: () => void }) => 
 								variant={"secondary"}
 								onClick={onCancel}
 								disabled={isPending}
+								className={cn(!onCancel && "invisible")}
 							>
 								Cancel
 							</Button>
