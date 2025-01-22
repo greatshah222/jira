@@ -11,6 +11,8 @@ import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useQueryState } from "nuqs";
 import { DataFilters } from "./data-filters";
 import { useTaskFilters } from "../hooks/use-task-filters";
+import { DataTable } from "@/components/data-table";
+import { columns } from "./columns";
 
 export const TaskViewSwitcher = () => {
 	const { open } = useCreateTaskModal();
@@ -29,6 +31,8 @@ export const TaskViewSwitcher = () => {
 	const [view, setView] = useQueryState("task-view", {
 		defaultValue: "table",
 	});
+
+	console.log("tasks", tasks, isLoadingTasks);
 
 	return (
 		<Tabs className="flex-1 w-full border rounded-lg" defaultValue={view} onValueChange={setView}>
@@ -61,7 +65,7 @@ export const TaskViewSwitcher = () => {
 				) : (
 					<>
 						<TabsContent value="table" className="mt-0">
-							{JSON.stringify(tasks)}
+							<DataTable columns={columns} data={tasks?.documents ?? []} />
 						</TabsContent>
 						<TabsContent value="kanban" className="mt-0">
 							{JSON.stringify(tasks)}
