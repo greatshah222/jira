@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useGetProject } from "@/features/projects/api/use-get-project";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { useProjectId } from "@/features/projects/hook/use-project-id";
+import { TaskViewSwitcher } from "@/features/tasks/components/task-view-switcher";
 import { PencilIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -45,6 +46,7 @@ export const ProjectIdClient = () => {
 					</Button>
 				</div>
 			</div>
+			<TaskViewSwitcher />
 		</div>
 	);
 };
