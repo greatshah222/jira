@@ -1,6 +1,6 @@
 import "server-only"; // NOW THIS CAN BE ONLY USED FROM SERVER COMPONENT
 
-import { Client, Account, Storage, Users, Databases } from "node-appwrite";
+import { Client, Account, Users, Databases } from "node-appwrite";
 
 import { cookies } from "next/headers";
 

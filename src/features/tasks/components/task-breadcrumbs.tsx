@@ -4,7 +4,7 @@ import { Task } from "../types";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import Link from "next/link";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { ChevronRightIcon, TrainIcon, TrashIcon } from "lucide-react";
+import { ChevronRightIcon, TrashIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDeleteTask } from "../api/use-delete-task";
 import { useConfirm } from "@/hooks/use-confirm";

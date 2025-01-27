@@ -285,7 +285,7 @@ export const EditWorkspaceForm = ({
 							className="mt-6 w-fit ml-auto"
 							size={"sm"}
 							variant={"destructive"}
-							disabled={isPending || isDeletingWorkspace}
+							disabled={isPending || isDeletingWorkspace || isResettingInviteCode}
 							onClick={() => {
 								handleResetInviteCode();
 							}}

@@ -8,16 +8,17 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { RiAddCircleFill } from "react-icons/ri";
+import { PageLoader } from "./page-loader";
 
 const Projects = () => {
 	const workspaceId = useWorkspaceId();
 
-	const { data, isPending } = useGetProjects({ workspaceId });
+	const { data, isLoading } = useGetProjects({ workspaceId });
 
 	const pathname = usePathname();
 	const { open } = useCreateProjectModal();
 
-	console.log("data", data);
+	if (isLoading) return <PageLoader />;
 	return (
 		<div className="flex flex-col gap-y-2">
 			<div className="flex justify-between items-center">

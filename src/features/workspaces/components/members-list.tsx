@@ -22,6 +22,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { PageLoader } from "@/components/page-loader";
 
 export const MembersList = () => {
 	const workspaceId = useWorkspaceId();
@@ -32,7 +33,7 @@ export const MembersList = () => {
 		"destructive"
 	);
 
-	const { data, isPending } = useGetMembers({ workspaceId });
+	const { data, isLoading } = useGetMembers({ workspaceId });
 
 	const { mutate: deleteMember, isPending: isDeletingMember } = useDeleteMember();
 	const { mutate: updateMember, isPending: isUpdatingMember } = useUpdateMember();
@@ -57,6 +58,7 @@ export const MembersList = () => {
 			}
 		);
 	};
+	if (isLoading) return <PageLoader />;
 
 	return (
 		<>
@@ -97,14 +99,14 @@ export const MembersList = () => {
 									<DropdownMenuContent side="bottom" align="end">
 										<DropdownMenuItem
 											onClick={() => handleUpdateMember(el.$id, MemberRole.ADMIN)}
-											disabled={false}
+											disabled={isDeletingMember || isUpdatingMember}
 											className="font-medium"
 										>
 											Set as Admin
 										</DropdownMenuItem>
 										<DropdownMenuItem
 											onClick={() => handleUpdateMember(el.$id, MemberRole.MEMBER)}
-											disabled={false}
+											disabled={isDeletingMember || isUpdatingMember}
 											className="font-medium"
 										>
 											Set as Member
@@ -113,7 +115,7 @@ export const MembersList = () => {
 											onClick={() => {
 												handleDeleteMember(el.$id);
 											}}
-											disabled={false}
+											disabled={isDeletingMember || isUpdatingMember}
 											className="font-medium text-amber-700"
 										>
 											Remove {el.name}
